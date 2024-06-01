@@ -7,15 +7,41 @@ public class Candidato {
     private double pretensaoSalarial;
     private String nomeCandidato;
     static Scanner scanner = new Scanner(System.in);
+   
+    public static Candidato [] getCandidato() { 
+        Candidato[] candidatos = new Candidato[5];
+        candidatos[0] = new Candidato();
+        candidatos[0].setNomeCandidato("Felipe");
+        candidatos[0].setPretensaoSalarial(1000.00);
+        candidatos[1] = new Candidato();
+        candidatos[1].setNomeCandidato("Marcia");
+        candidatos[1].setPretensaoSalarial(1500);
+        candidatos[2] = new Candidato();
+        candidatos[2].setNomeCandidato("Julia");
+        candidatos[2].setPretensaoSalarial(2000);
+        candidatos[3] = new Candidato();
+        candidatos[3].setNomeCandidato("Paulo");
+        candidatos[3].setPretensaoSalarial(2001);
+        candidatos[4]= new Candidato();
+        candidatos[4].setNomeCandidato("Augusto");
+        candidatos[4].setPretensaoSalarial(2002);
+        return candidatos;
+    }
+
+    public static void selecionarCandidato(Candidato [] candidatos) {
+        for (Candidato candidato : candidatos) {
+            candidato.analisarPretensaoSalario(candidato.getPretensaoSalarial());
+        }
+    }
 
     public void analisarPretensaoSalario(double pretensaoSalarial) {
         if (this.salarioBase > pretensaoSalarial) {
             System.out.println("LIGAR PARA O CANDIDATO " + getNomeCandidato().toUpperCase() + "!!!");
         } else if (this.salarioBase == pretensaoSalarial) {
             System.out.println(
-                    "LIGAR PARA O CANDIDATO".concat(getNomeCandidato().toUpperCase()).concat("COM CONTRA PROPOSTA"));
+                    "LIGAR PARA O CANDIDATO ".concat(getNomeCandidato().toUpperCase()).concat(" COM CONTRA PROPOSTA"));
         } else {
-            System.out.println("AGUARDANDo RESULTADO DEMAIS CANDIDATOS");
+            System.out.println("AGUARDANDO RESULTADO DEMAIS CANDIDATOS");
         }
     }
 
@@ -29,7 +55,6 @@ public class Candidato {
             setNomeCandidato(scanner.nextLine());
             count++;
         } while (getNomeCandidato().isEmpty() || getNomeCandidato().startsWith(" "));
-
         count = 0;
         do {
             if (count > 0) {
@@ -43,7 +68,7 @@ public class Candidato {
 
     }
 
-    public static void main(String[] args) {
+    public static void preencherCandidato(){
         for (int i = 0; i < 10; i++) {
             String sair = "N";
             boolean valido = true;
@@ -62,6 +87,13 @@ public class Candidato {
                 can.analisarPretensaoSalario(can.getPretensaoSalarial());
             }
         }
+    }
+    
+    public static void main(String[] args) {
+        //Candidato.preencherCandidato();
+        Candidato.selecionarCandidato(Candidato.getCandidato());
+       
+
     }
 
     public void setNomeCandidato(String nomeCandidato) {
